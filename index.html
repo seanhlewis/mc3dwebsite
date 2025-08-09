@@ -7,14 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minecraft to 3D: A Pipeline for High‑Fidelity Reconstruction of Minecraft Worlds</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:title" content="Minecraft to 3D: A Pipeline for High-Fidelity Reconstruction of Minecraft Worlds">
+  <meta property="og:description" content="Minecraft to 3D automatically converts any Minecraft build into a production-ready polygonal scene.">
+  <meta property="og:image" content="https://mc3d.org/static/images/meta.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mc3d.org/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Minecraft to 3D: A Pipeline for High-Fidelity Reconstruction of Minecraft Worlds">
+  <meta name="twitter:description" content="Minecraft to 3D automatically converts any Minecraft build into a production-ready polygonal scene.">
+  <meta name="twitter:image" content="https://mc3d.org/static/images/meta.png">
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
@@ -23,7 +27,21 @@
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./static/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./static/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./static/images/favicon-16x16.png">
+  <link rel="manifest" href="./static/images/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="./static/images/favicon.ico">
+
+  <!-- Android Chrome icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./static/images/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./static/images/android-chrome-512x512.png">
+
+  <!-- Theme and tile colors -->
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#ffffff">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -58,7 +76,7 @@
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">Minecraft to 3D: A Pipeline for High‑Fidelity Reconstruction of Minecraft Worlds</h1>
             <div class="is-size-5 publication-authors">
-              <span class="author-block"><a href="https://github.com/seanhlewis">Sean Hardesty Lewis</a></span>
+              <span class="author-block"><a href="https://linkedin.com/in/seanhardestylewis">Sean Hardesty Lewis</a></span>
             </div>
             <div class="is-size-5 publication-authors">
               <span class="author-block">Cornell Tech</span>
@@ -82,9 +100,9 @@
                 </span>
                 <!-- Video Link -->
                 <span class="link-block">
-                  <a href="/" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fab fa-youtube"></i></span>
-                    <span>Video</span>
+                  <a href="/static/images/Minecraft_to_3D_Poster.png" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-newspaper"></i></span>
+                    <span>Poster</span>
                   </a>
                 </span>
               </div>
@@ -411,19 +429,47 @@
 
   </section>
 
-  <!-- BibTeX -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@unpublished{lewis2025mc3d,
-  author       = {Lewis, Sean Hardesty},
-  title        = {Minecraft to 3D: A Pipeline for High-Fidelity Reconstruction of Minecraft Worlds},
-  booktitle    = {Proceedings of SIGGRAPH Posters 2025},
-  year         = {2025},
-  doi          = {}
+ <!-- BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{10.1145/3721250.3743044,
+author = {Lewis, Sean Hardesty},
+title = {Minecraft to 3D: A Pipeline for High-Fidelity Reconstruction of Minecraft Worlds},
+year = {2025},
+isbn = {9798400715495},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3721250.3743044},
+doi = {10.1145/3721250.3743044},
+abstract = {We introduce Minecraft to 3D, a novel pipeline that automatically converts any Minecraft world into a high-quality polygonal scene. A 3D convolutional network recognises Minecraft’s default objects, the block surface is resampled into a smooth height-map, and each recognised object is substituted with a high-quality 3D model chosen from an external library. Object locations, orientations, and tags are preserved, a separate water plane is exported for engine-level ocean rendering, and the final scene opens natively in modern 3D engines. The pipeline processes a one-square-kilometre world in under three minutes on a single consumer GPU, enabling educators, indie developers, and artists to move rapidly from voxel sketches to fully lit environments.},
+booktitle = {Proceedings of the Special Interest Group on Computer Graphics and Interactive Techniques Conference Posters},
+articleno = {5},
+numpages = {2},
+location = {},
+series = {SIGGRAPH Posters '25}
 }</code></pre>
-    </div>
-  </section>
+  </div>
+</section>
+
+<!-- Acknowledgements -->
+<section class="section" id="acknowledgements">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgements</h2>
+    <p>
+      Minecraft™ and related assets © Mojang Studios (2025). Minecraft™
+      screenshots, textures, or other Mojang assets, or derivatives of
+      Mojang assets displayed are used here for educational research under
+      Mojang AB © permission per the published Minecraft™ Brand and
+      Asset Usage Guidelines v2.1. This work is not affiliated with or
+      endorsed by Mojang AB.
+    </p>
+    <p>
+      The author thanks the open-source asset community for their
+      support. All 3D models shown are CC0.
+    </p>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer class="footer">
