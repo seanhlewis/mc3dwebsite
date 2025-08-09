@@ -121,7 +121,13 @@
             <img src="./static/images/compare02.png" alt="Comparison 2">
           </div>
           <div class="item">
+            <img src="./static/images/compare06.png" alt="Comparison 3">
+          </div>
+          <div class="item">
             <img src="./static/images/compare03.png" alt="Comparison 3">
+          </div>
+          <div class="item">
+            <img src="./static/images/compare05.png" alt="Comparison 3">
           </div>
           <div class="item">
             <img src="./static/images/compare04.png" alt="Comparison 4">
@@ -154,6 +160,12 @@
             <p>
               Voxel data are streamed in <code>256&nbsp;×&nbsp;256</code>‑block tiles with a 20‑block overlap so that structures crossing region boundaries retain context. A 3D U‑Net trained on Minecraft’s canonical assets—oak trees, villager houses, desert temples, and related variants—assigns a semantic label to every object. The network achieves <strong>97.8&nbsp;%</strong> mean intersection‑over‑union (mIoU) on isolated structures and <strong>88.6&nbsp;%</strong> where multiple structures intersect.
             </p>
+            <figure class="image">
+              <img src="./static/images/3dcnn.png" alt="Overview of 3D CNN labeling and substitution">
+              <figcaption style="text-align:center; font-style:italic; margin-top:0.5em;">
+                Overview of 3D CNN labeling and substitution
+              </figcaption>
+            </figure>
             <p>
               After segmentation, non‑terrain voxels are hidden, the stepped surface is up‑sampled with trilinear interpolation, and an anisotropic Gaussian filter removes staircase artefacts. Tiles are cropped to their original bounds, then merged with a Poisson blend; the blend suppresses seams without disturbing coarse relief.
             </p>
@@ -163,6 +175,14 @@
           </div>
         </div>
       </div>
+
+      <figure class="image" style="text-align:center;">
+        <img src="./static/images/terrain.png" alt="Workflow for terrain upscaling" style="width:75%; height:auto; display:inline-block;">
+        <figcaption style="text-align:center; font-style:italic; margin-top:0.5em;">
+          Workflow for terrain upscaling
+        </figcaption>
+      </figure>
+      <br></br>
 
       <!-- Performance -->
       <div class="columns is-centered has-text-centered">
@@ -175,6 +195,12 @@
           </div>
         </div>
       </div>
+
+      <!-- <figure class="image" style="text-align:center;">
+        <img src="./static/images/platforms.png" alt="Workflow for terrain upscaling" style="width:10%; height:auto; display:inline-block;">
+        <figcaption style="text-align:center; font-style:italic; margin-top:0.5em;">
+        </figcaption>
+      </figure> -->
 
       <!-- Limitations -->
       <div class="columns is-centered has-text-centered">
@@ -212,6 +238,177 @@
         </div>
       </div>
     </div>
+
+    <br></br>
+    <!-- Scrolling community-created structures strip (seamless via JS, equal spacing, doubled speed) -->
+<style>
+  .scroll-strip {
+    position: relative;
+    overflow: hidden;
+    margin: 1.25rem auto 0.5rem auto;
+    max-width: 1100px; /* optional: match your text width */
+    background: white; /* ensure fades blend; change if your bg differs */
+  }
+
+  /* Edge fades */
+  .scroll-strip::before,
+  .scroll-strip::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .scroll-strip::before { left: 0;  background: linear-gradient(to right, white, rgba(255,255,255,0)); }
+  .scroll-strip::after  { right: 0; background: linear-gradient(to left,  white, rgba(255,255,255,0)); }
+
+  .scroll-viewport {
+    overflow: hidden; /* safety */
+  }
+
+  /* Track holds two identical sequences side-by-side */
+  .scroll-track {
+    display: flex;
+    align-items: center;
+    will-change: transform;
+  }
+
+  /* One image sequence */
+  .scroll-seq {
+    display: flex;
+    align-items: center;
+    gap: 10px;          /* equal spacing between images */
+    flex: 0 0 auto;     /* no shrinking */
+  }
+
+  .scroll-strip img {
+    height: 150px;      /* uniform thumbnail height */
+    width: auto;
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-strip[data-reduce-motion="true"] .scroll-track { transform: none !important; }
+  }
+</style>
+
+<figure class="image" style="text-align:center;">
+  <div class="scroll-strip" id="mc-future-strip" aria-label="Minecraft community-created structures">
+    <div class="scroll-viewport">
+      <div class="scroll-track">
+        <!-- Sequence A -->
+        <div class="scroll-seq" id="mc-future-seqA">
+          <img src="./static/images/future/1.png" alt="Minecraft community-created structure 1">
+          <img src="./static/images/future/2.png" alt="Minecraft community-created structure 2">
+          <img src="./static/images/future/3.png" alt="Minecraft community-created structure 3">
+          <img src="./static/images/future/4.png" alt="Minecraft community-created structure 4">
+          <img src="./static/images/future/5.png" alt="Minecraft community-created structure 5">
+          <img src="./static/images/future/6.png" alt="Minecraft community-created structure 6">
+          <img src="./static/images/future/7.png" alt="Minecraft community-created structure 7">
+        </div>
+        <!-- Sequence B (clone inserted by JS if not present) -->
+      </div>
+    </div>
+  </div>
+
+  <br></br>
+  <figcaption style="text-align:center; font-style:italic; margin-top:0.5em;">
+    Minecraft community-created structures
+  </figcaption>
+</figure>
+
+<script>
+(function() {
+  const strip   = document.getElementById('mc-future-strip');
+  const track   = strip.querySelector('.scroll-track');
+  const seqA    = strip.querySelector('#mc-future-seqA');
+
+  // Helper: wait for all images in seqA to finish loading (handles cache too)
+  function imagesLoaded(container) {
+    const imgs = Array.from(container.querySelectorAll('img'));
+    return Promise.all(imgs.map(img => {
+      if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+      return new Promise(res => { img.addEventListener('load', res, {once:true}); img.addEventListener('error', res, {once:true}); });
+    }));
+  }
+
+  imagesLoaded(seqA).then(() => {
+    // Clone A to make B, ensuring identical widths for seamless loop
+    let seqB = seqA.cloneNode(true);
+    seqB.id = 'mc-future-seqB';
+    seqB.setAttribute('aria-hidden', 'true');
+    track.appendChild(seqB);
+
+    // Compute one sequence width (including gaps)
+    const seqWidth = seqA.getBoundingClientRect().width;
+
+    // Desired speed: one sequence every 17.5s (double the old 35s)
+    const pixelsPerSecond = seqWidth / 17.5;
+
+    // rAF ticker
+    let x = 0;
+    let last = performance.now();
+    let reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      strip.setAttribute('data-reduce-motion', 'true');
+      return; // no animation
+    }
+
+    function tick(now) {
+      const dt = (now - last) / 1000; // seconds
+      last = now;
+
+      x -= pixelsPerSecond * dt;
+
+      // When A has completely left the viewport, shift by exactly one sequence width.
+      // Because B is an exact duplicate, this reposition happens off-screen, making it seamless.
+      if (x <= -seqWidth) {
+        x += seqWidth;
+      }
+
+      track.style.transform = 'translate3d(' + x + 'px, 0, 0)';
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+
+    // If the window resizes (or fonts/zoom change), recompute widths & speed
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const w = seqA.getBoundingClientRect().width;
+        // adjust speed based on new width
+        const pps = w / 17.5;
+        // update closure vars safely
+        last = performance.now();
+        // override local variables by reassigning
+        // (create new function scope to capture new pps)
+        (function updateSpeed(newSeqWidth, newPps){
+          track.style.transform = 'translate3d(' + x + 'px,0,0)';
+          // replace tick with one that uses new values
+          function newTick(now) {
+            const dt = (now - last) / 1000;
+            last = now;
+            x -= newPps * dt;
+            if (x <= -newSeqWidth) x += newSeqWidth;
+            track.style.transform = 'translate3d(' + x + 'px,0,0)';
+            requestAnimationFrame(newTick);
+          }
+          requestAnimationFrame(newTick);
+        })(w, pps);
+      }, 150);
+    });
+  });
+})();
+</script>
+
+
+
+
   </section>
 
   <!-- BibTeX -->
